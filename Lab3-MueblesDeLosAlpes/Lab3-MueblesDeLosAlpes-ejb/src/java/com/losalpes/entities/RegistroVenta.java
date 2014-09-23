@@ -14,8 +14,11 @@ package com.losalpes.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -43,7 +46,7 @@ public class RegistroVenta implements Serializable
     /**
      * Producto vendido
      */
-    @OneToOne
+    @OneToOne( fetch = FetchType.LAZY)
     private Mueble producto;
 
     /**
@@ -60,11 +63,11 @@ public class RegistroVenta implements Serializable
      * Usuario que compró el producto
      */
     
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     private Usuario comprador;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     //-----------------------------------------------------------

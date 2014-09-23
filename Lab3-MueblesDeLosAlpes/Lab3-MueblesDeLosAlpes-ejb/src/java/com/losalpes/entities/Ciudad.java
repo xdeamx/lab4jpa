@@ -12,8 +12,10 @@
 
 package com.losalpes.entities;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -21,7 +23,7 @@ import javax.persistence.Id;
  * @author Juan Sebastián Urrego
  */
 @Entity
-public class Ciudad
+public class Ciudad implements Serializable
 {
       
     //-----------------------------------------------------------
@@ -33,7 +35,7 @@ public class Ciudad
      */
     private String nombre;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /**

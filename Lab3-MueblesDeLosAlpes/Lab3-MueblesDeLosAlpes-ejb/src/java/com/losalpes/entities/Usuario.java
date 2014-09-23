@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -36,7 +38,7 @@ public class Usuario implements Serializable
     //-----------------------------------------------------------
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     /**
      * Nombre del usuario
@@ -83,7 +85,7 @@ public class Usuario implements Serializable
     /**
      * Ciudad de residencia del usuario
      */
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Ciudad ciudad;
 
     /**
@@ -112,7 +114,7 @@ public class Usuario implements Serializable
      */
     
     
-    @OneToMany(mappedBy = "comprador")
+    @OneToMany(mappedBy = "comprador", fetch = FetchType.LAZY)
     private ArrayList<RegistroVenta>compras;
 
     //-----------------------------------------------------------
