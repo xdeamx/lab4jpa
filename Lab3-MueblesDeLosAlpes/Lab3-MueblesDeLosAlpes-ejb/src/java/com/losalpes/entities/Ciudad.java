@@ -12,10 +12,15 @@
 
 package com.losalpes.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Clase que representa una ciudad en el sistema
  * @author Juan Sebastián Urrego
  */
+@Entity
 public class Ciudad
 {
       
@@ -27,6 +32,9 @@ public class Ciudad
      * Nombre de la ciudad
      */
     private String nombre;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     /**
      * Devuelve el nombre de la ciudad
@@ -69,6 +77,14 @@ public class Ciudad
     public void setNombre(String nombre)
     {
         this.nombre = nombre;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

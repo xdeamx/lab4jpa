@@ -11,14 +11,21 @@
  */
 package com.losalpes.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Clase que modela un vendedor dentro del sistema.
  * @author Juan Sebastián Urrego
  */
-public class Vendedor
+
+@Entity
+public class Vendedor implements Serializable
 {
 
     //-----------------------------------------------------------
@@ -28,6 +35,8 @@ public class Vendedor
     /**
      * Número de identificación del vendedor
      */
+    @Id
+    @GeneratedValue
     private long id;
 
     /**
@@ -43,6 +52,7 @@ public class Vendedor
     /**
      * Lista de ítems de experiencia del vendedor.
      */
+    @OneToMany
     private List<ExperienciaVendedor> experiencia;
 
     /**
@@ -61,7 +71,7 @@ public class Vendedor
     private String perfil;
 
     /**
-     * Foto del vendedor.
+     * Foto del vendedor.x 
      */
     private String foto;
 

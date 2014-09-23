@@ -11,13 +11,19 @@
  */
 package com.losalpes.entities;
 
+import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Clase que representa un país en el sistema
  * @author Juan Sebastián Urrego
  */
-public class Pais
+@Entity
+public class Pais implements Serializable
 {
 
     //-----------------------------------------------------------
@@ -31,7 +37,13 @@ public class Pais
     /**
      * Ciudades que tiene el país
      */
+    
+    @OneToMany
     private List<Ciudad> ciudades;
+    
+    @Id
+    @GeneratedValue
+    private Long id;
 
     //-----------------------------------------------------------
     // Constructores
@@ -94,6 +106,14 @@ public class Pais
     public void setCiudades(List<Ciudad> ciudades)
     {
         this.ciudades = ciudades;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

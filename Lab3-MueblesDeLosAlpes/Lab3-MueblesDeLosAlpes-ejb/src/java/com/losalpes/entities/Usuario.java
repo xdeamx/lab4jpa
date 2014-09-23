@@ -12,19 +12,32 @@
 
 package com.losalpes.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Clase que representa un usuario del sistema
  * @author Juan Sebastián Urrego
  */
-public class Usuario
+
+@Entity
+public class Usuario implements Serializable
 {
 
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
 
+    @Id
+    @GeneratedValue
+    private long id;
     /**
      * Nombre del usuario
      */
@@ -38,6 +51,7 @@ public class Usuario
     /**
      * Tipo de usuario
      */
+    @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 
     /**
@@ -53,6 +67,7 @@ public class Usuario
     /**
      * Tipo de documento
      */
+    @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento;
 
     /**
@@ -68,6 +83,7 @@ public class Usuario
     /**
      * Ciudad de residencia del usuario
      */
+    @OneToOne
     private Ciudad ciudad;
 
     /**
@@ -78,10 +94,11 @@ public class Usuario
     /**
      * Profesión del usuario
      */
+    @Enumerated(EnumType.STRING)
     private Profesion profesion;
 
     /**
-     * Correo electrónico del usuario
+     * Correo electrónico del usuarioR
      */
     private String correo;
 
@@ -93,6 +110,9 @@ public class Usuario
     /**
      * Devuelve un lista con todos las compras del usuario
      */
+    
+    
+    @OneToMany(mappedBy = "comprador")
     private ArrayList<RegistroVenta>compras;
 
     //-----------------------------------------------------------
