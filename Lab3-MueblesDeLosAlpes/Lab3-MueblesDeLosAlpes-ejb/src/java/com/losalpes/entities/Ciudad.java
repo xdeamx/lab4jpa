@@ -12,11 +12,18 @@
 
 package com.losalpes.entities;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Clase que representa una ciudad en el sistema
  * @author Juan Sebastián Urrego
  */
-public class Ciudad
+@Entity
+public class Ciudad implements Serializable
 {
       
     //-----------------------------------------------------------
@@ -27,6 +34,9 @@ public class Ciudad
      * Nombre de la ciudad
      */
     private String nombre;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     /**
      * Devuelve el nombre de la ciudad
@@ -69,6 +79,14 @@ public class Ciudad
     public void setNombre(String nombre)
     {
         this.nombre = nombre;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

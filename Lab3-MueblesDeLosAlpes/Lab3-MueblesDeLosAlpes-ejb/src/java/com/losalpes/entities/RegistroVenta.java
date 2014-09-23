@@ -12,13 +12,25 @@
 
 package com.losalpes.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  * Clase que modela un registro de venta realizado por un cliente
  * @author Juan Sebastián Urrego
  */
-public class RegistroVenta
+
+@Entity
+public class RegistroVenta implements Serializable
 {
 
     //-----------------------------------------------------------
@@ -28,11 +40,13 @@ public class RegistroVenta
     /**
      * Fecha en la que se vendió el producto
      */
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaVenta;
 
     /**
      * Producto vendido
      */
+    @OneToOne( fetch = FetchType.LAZY)
     private Mueble producto;
 
     /**
@@ -48,7 +62,13 @@ public class RegistroVenta
     /**
      * Usuario que compró el producto
      */
+    
+    @ManyToOne (fetch = FetchType.LAZY)
     private Usuario comprador;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     //-----------------------------------------------------------
     // Constructor
@@ -171,6 +191,14 @@ public class RegistroVenta
     public void setComprador(Usuario comprador)
     {
         this.comprador = comprador;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

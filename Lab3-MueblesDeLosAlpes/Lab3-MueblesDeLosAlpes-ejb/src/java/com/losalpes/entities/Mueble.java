@@ -12,11 +12,22 @@
 
 package com.losalpes.entities;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+
+
 /**
  * Clase que representa la información de un mueble en el sistema
  * @author Juan Sebastián Urrego
  */
-public class Mueble
+
+@Entity
+public class Mueble implements Serializable
 {
 
     //-----------------------------------------------------------
@@ -41,6 +52,7 @@ public class Mueble
     /**
      * Tipo de mueble.
      */
+    @Enumerated(EnumType.STRING)
     private TipoMueble tipo;
 
     /**
@@ -62,6 +74,10 @@ public class Mueble
      * Indica si el mueble fue seleccionado
      */
     private boolean seleccion;
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     //-----------------------------------------------------------
     // Constructores
@@ -260,5 +276,13 @@ public class Mueble
     {
         cantidad--;
     } 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }
