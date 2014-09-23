@@ -62,9 +62,10 @@ public class ServicioSeguridadMock implements IServicioSeguridadMockLocal
     {
    
         Usuario u = (Usuario) persistencia.findById(Usuario.class, nombre);
-
+        
         if (u != null)
         {
+            System.out.println(u.getNombreCompleto());
             if (u.getLogin().equals(nombre) && u.getContraseña().equals(contraseña))
             {
                 return u;

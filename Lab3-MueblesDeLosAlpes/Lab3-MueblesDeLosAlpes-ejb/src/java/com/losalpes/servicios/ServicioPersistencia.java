@@ -13,10 +13,15 @@
 
 package com.losalpes.servicios;
 
+import com.losalpes.entities.Usuario;
 import com.losalpes.excepciones.OperacionInvalidaException;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Implementación de los servicios de persistencia
@@ -34,6 +39,9 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     /**
      * La entidad encargada de persistir en la base de datos
      */
+    @PersistenceContext
+    EntityManager em;
+    EntityTransaction et;
     
     //TODO
 
@@ -61,6 +69,10 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     public void create(Object obj) throws OperacionInvalidaException
     {
        //TODO
+        //et = em.getTransaction();
+        //et.begin();
+        em.persist(obj); 
+        //et. commit(); 
     }
 
     /**
@@ -71,6 +83,7 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     public void update(Object obj)
     {
        //TODO
+        em.merge(obj);
     }
 
     /**
@@ -80,8 +93,9 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     @Override
     public void delete(Object obj) throws OperacionInvalidaException
     {
-       //TODO
-
+        if (obj != null) {
+          em.remove(obj);
+        }
     }
 
     /**
@@ -92,8 +106,9 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     @Override
     public List findAll(Class c)
     {
-        return null;
-        //return entityManager.createQuery("select O from " + c.getSimpleName() + " as O").getResultList();
+    String queryString = "SELECT c FROM "+c.getSimpleName()+" c ";
+    Query query = em.createQuery(queryString);
+    return query.getResultList();
     }
 
     /**
@@ -105,7 +120,22 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     @Override
     public Object findById(Class c, Object id)
     {
-        //TODO
-        return null;
+        
+        if (c.equals(Usuario.class))
+        {
+            String queryString = "SELECT c FROM "+c.getSimpleName()+" c  Where c.login ='"+String.valueOf(id)+"'";
+            Query query = em.createQuery(queryString);
+            List tmp=query.getResultList();
+            System.out.println(queryString);
+            System.out.println(tmp.size());
+            if(tmp!=null){
+             if(tmp.size()>0){
+              return tmp.get(0);
+             }
+            }
+            return null;
+        }else{
+            return em.find(c, id);
+        }
     }
 }

@@ -103,7 +103,7 @@ public class ServicioRegistroMock implements IServicioRegistroMockRemote, IServi
     @Override
     public List<Usuario> darClientes()
     {
-        return(ArrayList<Usuario>) persistencia.findAll(Usuario.class);
+        return(List<Usuario>) persistencia.findAll(Usuario.class);
     }
 
 }

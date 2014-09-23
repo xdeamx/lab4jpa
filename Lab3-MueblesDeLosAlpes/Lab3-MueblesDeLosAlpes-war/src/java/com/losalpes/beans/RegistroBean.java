@@ -97,7 +97,7 @@ public class RegistroBean implements Serializable
         mostrarVentana=false;
         usuario = new Usuario();
 
-        ArrayList<Ciudad> array = new ArrayList<Ciudad>();
+        List<Ciudad> array = new ArrayList<Ciudad>();
         array.add(new Ciudad("Bogotá"));
         array.add(new Ciudad("Cali"));
         array.add(new Ciudad("Cartagena"));
@@ -106,7 +106,7 @@ public class RegistroBean implements Serializable
         pais = new Pais("Colombia", array);
         paises.add(pais);
 
-        ArrayList<Ciudad> array2 = new ArrayList<Ciudad>();
+        List<Ciudad> array2 = new ArrayList<Ciudad>();
         array2.add(new Ciudad("Atlanta"));
         array2.add(new Ciudad("Chicago"));
         array2.add(new Ciudad("Miami"));
@@ -115,7 +115,7 @@ public class RegistroBean implements Serializable
 
         paises.add(new Pais("Estados Unidos", array2));
 
-        ArrayList<Ciudad> array3 = new ArrayList<Ciudad>();
+        List<Ciudad> array3 = new ArrayList<Ciudad>();
         array3.add(new Ciudad("Cambridge"));
         array3.add(new Ciudad("Canterbury"));
         array3.add(new Ciudad("Liverpool"));
