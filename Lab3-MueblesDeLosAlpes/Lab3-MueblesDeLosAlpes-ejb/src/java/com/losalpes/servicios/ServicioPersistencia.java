@@ -195,8 +195,15 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     @Override
     public List<Mueble> findTopfurniture(int max) {
         List<Mueble> muebles = null;  
-        String sql = "select mueble from registroventa.mueble mueble item group by mueble.nombre order by sum(registroventa.mueble.cantidad) DESC";
+        //String sql = "select registroVenta.producto from registroventa.producto group by registroventa.producto.nombre order by sum(registroventa.producto.cantidad) DESC";
+        //String sql = "select mueble from registroventa.producto mueble";
+        String sql = "SELECT m FROM RegistroVenta.producto m WHERE m.nombre LIKE :nombre";
+
+        //String sql = "SELECT rv.producto FROM RegistroVenta rv GROUP BY rv.producto.nombre ORDER BY sum(rv.cantidad) DESC";
+        //String sql = "SELECT registroVenta.producto FROM RegistroVenta registroVenta GROUP BY registroVenta.producto.nombre ORDER BY registroVenta.cantidad DESC"; 
         Query query = em.createQuery(sql, RegistroVenta.class);
+                      query.setParameter("nombre", "silla");
+        
         //query.setParameter("names", names);
         if(max > 0)
             query.setMaxResults(max);
