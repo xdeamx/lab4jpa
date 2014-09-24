@@ -78,7 +78,7 @@
         </navigation-case>
     </navigation-rule>
     
-        <navigation-rule>
+    <navigation-rule>
         <from-view-id>/reportemuebles.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>reportemuebles</from-outcome>

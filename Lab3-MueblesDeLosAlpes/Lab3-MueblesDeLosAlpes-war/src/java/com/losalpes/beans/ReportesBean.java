@@ -83,6 +83,18 @@ public class ReportesBean {
        List<Mueble> muebles = persistenciaService.findTopfurniture(3);
        return muebles;
     }
+     
+    /**
+      * Retorna el listado de muebles
+      * @return Lista con todos los muebles mas vendidos
+      */
+     public List<Mueble> getMuebles()
+    {
+       //List<RegistroVenta> ventas = persistenciaService.findAll(RegistroVenta.class);
+       //List<Mueble> muebles = persistenciaService.findTopfurniture(3);
+       return (List<Mueble>)persistenciaService.findAll(Mueble.class);
+    }
+     
 
     /**
      * @return the idPais
