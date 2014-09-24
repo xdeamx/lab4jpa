@@ -10,8 +10,13 @@
     <ui:param name="titulo" value="Top 5 de clientes por país" />
     <ui:define name="body">
         <h:form>
-            <ice:selectOneMenu value="#{reportesBean.pais}" >
-                <f:selectItems value="#{reportesBean.paises}" />
+                <div align="right" style="padding-right: 10px">
+                    <ice:commandButton style="background: transparent" image="./resources/img/pag/atras.png" action="clientes.jsf"/>
+                </div>
+            </h:form>
+        <h:form>
+            <ice:selectOneMenu value="#{reportesBean.idPais}"  >
+                <f:selectItems value="#{reportesBean.paises}"  var="paistmp" itemLabel="#{paistmp.nombre}" itemValue="#{paistmp.id}" />
             </ice:selectOneMenu>
             <ice:commandButton value="Buscar" action="top5ClientesView"></ice:commandButton>
                               
@@ -47,7 +52,7 @@
                         <f:facet name="header">
                             Numero de compras 
                         </f:facet>
-                        <ice:outputText value="#{ usuario.compras!= null? usuario.compras.size():0}"/>
+                        <ice:outputText value="#{usuario.compras.size()}"/>
                     </ice:column>
                     
                     <ice:column>

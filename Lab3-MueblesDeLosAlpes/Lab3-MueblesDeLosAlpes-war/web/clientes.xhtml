@@ -28,7 +28,7 @@
                     <ice:commandButton style="background: transparent" image="./resources/img/pag/atras.png" action="menu.jsf"/>
                 </div>
                 <div align="right" style="padding-right: 10px">
-                    <ice:commandLink action="" value="Top 5 de clientes"/>
+                    <ice:commandLink action="top5ClientesView" value="Top 5 de clientes"/>
                 </div>
             </h:form>
             <h:form>
@@ -382,7 +382,7 @@
                                 value="Ver detalle"
                                 style="color:white"/>
                         </f:facet>
-                        <ice:commandButton action="#{reportesBean.verHistial(file.id)}">
+                        <ice:commandButton action="#{reportesBean.verHistial(file.login)}">
                              
                         </ice:commandButton>
                     </ice:column>

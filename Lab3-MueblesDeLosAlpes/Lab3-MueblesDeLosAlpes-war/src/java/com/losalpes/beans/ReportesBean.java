@@ -23,7 +23,8 @@ public class ReportesBean {
     @EJB
     private IServicioPersistenciaMockLocal persistenciaService;
     
-    private int idCliente;
+    private String login;
+    private int idPais=-1;
     private Pais pais=null;
     /**
      * Creates a new instance of ReportesBean
@@ -32,13 +33,13 @@ public class ReportesBean {
     }
     
     public List<RegistroVenta> getReportesComprasCliente(){
-        Usuario usuario = (Usuario)persistenciaService.findById(Usuario.class, idCliente);
+        Usuario usuario = (Usuario)persistenciaService.findById(Usuario.class, login);
         return usuario.getCompras();
     }
     
-    public String verHistial(int idCliente){
-        this.idCliente = idCliente;
-        return "verHistorialCliente";
+    public String verHistial(String login){
+        this.login = login;
+        return "HistorialUsuarioView";
     }
     
     public void setPais(Pais pais){
@@ -51,7 +52,9 @@ public class ReportesBean {
     public List<Usuario> getTop5Usuarios(){
         List<Usuario> usuarios= new LinkedList<Usuario>();
         List<Ciudad> ciudades;
-        if(this.pais !=null){
+        System.out.print(this.getIdPais());
+        if(this.getIdPais() !=-1){
+            this.pais = (Pais) persistenciaService.findById(Pais.class,new Long(this.getIdPais()));
             ciudades = this.pais.getCiudades();
             usuarios = persistenciaService.findUsersByCities(ciudades,5);
         }
@@ -67,7 +70,7 @@ public class ReportesBean {
     }
     
     public List<Pais> getPaises(){
-        return persistenciaService.findAll(Pais.class);
+        return (List<Pais>)persistenciaService.findAll(Pais.class);
     }
 
     /**
@@ -80,4 +83,20 @@ public class ReportesBean {
        List<Mueble> muebles = persistenciaService.findTopfurniture(ventas);
         return muebles;
     }
+
+    /**
+     * @return the idPais
+     */
+    public int getIdPais() {
+        return idPais;
+    }
+
+    /**
+     * @param idPais the idPais to set
+     */
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
+    }
+     
+     
 }

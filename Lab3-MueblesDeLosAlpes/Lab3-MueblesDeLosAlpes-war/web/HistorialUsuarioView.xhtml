@@ -15,7 +15,9 @@
     <ui:param name="titulo" value="Historial del usuario" />
     <ui:define name="body">
         <h:form>
-            <ice:commandLink id="volverListaClientes" value="Volver" action="listadoCliente" ></ice:commandLink>
+           <div align="right" style="padding-right: 10px">
+                    <ice:commandButton style="background: transparent" image="./resources/img/pag/atras.png" action="clientes.jsf"/>
+                </div>
         </h:form>
         <h:form>
             <ice:panelGroup>
