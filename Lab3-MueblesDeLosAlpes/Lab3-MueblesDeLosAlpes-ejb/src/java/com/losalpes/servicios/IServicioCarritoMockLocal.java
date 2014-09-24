@@ -15,6 +15,7 @@ package com.losalpes.servicios;
 import com.losalpes.entities.Mueble;
 import com.losalpes.entities.Usuario;
 import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -29,13 +30,13 @@ public interface IServicioCarritoMockLocal
      * Devuelve el inventario de muebles que se encuentran en el carrito
      * @return inventario Lista con los muebles que se encuentran en el carrito
      */
-    public ArrayList<Mueble> getInventario();
+    public List<Mueble> getInventario();
 
     /**
      * Modifica el inventario del carrito
      * @param inventario Nueva lista de muebles
      */
-    public void setInventario(ArrayList<Mueble> inventario);
+    public void setInventario(List<Mueble> inventario);
 
     /**
      * Devuelve el precio total del inventario
