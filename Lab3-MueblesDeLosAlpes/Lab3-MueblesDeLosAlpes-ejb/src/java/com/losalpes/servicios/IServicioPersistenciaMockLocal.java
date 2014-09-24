@@ -75,6 +75,6 @@ public interface IServicioPersistenciaMockLocal
      * @param ventas Registro de ventas
      * @param  max cantidad maxima de registros a obtener
      */
-    public List<Mueble> findTopfurniture(List<RegistroVenta> ventas,int max);
+    public List<Mueble> findTopfurniture(int max);
 
 }
