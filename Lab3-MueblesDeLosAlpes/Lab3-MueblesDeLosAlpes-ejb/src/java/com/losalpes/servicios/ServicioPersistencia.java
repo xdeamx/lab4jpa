@@ -13,10 +13,17 @@
 
 package com.losalpes.servicios;
 
+import com.losalpes.entities.Ciudad;
+import com.losalpes.entities.Usuario;
 import com.losalpes.excepciones.OperacionInvalidaException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 
 /**
  * Implementación de los servicios de persistencia
@@ -35,6 +42,10 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
      * La entidad encargada de persistir en la base de datos
      */
     
+    @PersistenceUnit
+    private EntityManagerFactory entityManagerFactory; 
+    EntityManager entityManager = entityManagerFactory.createEntityManager(); 
+
     //TODO
 
     //-----------------------------------------------------------
@@ -107,5 +118,23 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     {
         //TODO
         return null;
+    }
+
+    @Override
+    public List<Usuario> findUsersByCities(List<Ciudad> ciudades, int max) {
+        ArrayList<String> names= new ArrayList<String>();
+        List<Usuario> usuarios;
+        for(Ciudad ciudad : ciudades){
+            names.add(ciudad.getNombre());
+        }
+        String sql = "select usuario from Usuario usuario item where usuario.ciudad.nombre IN (:names)";
+       
+        Query query = entityManager.createQuery(sql, Usuario.class);
+        query.setParameter("names", names);
+        if(max > 0)
+            query.setMaxResults(max);
+            
+        usuarios = query.getResultList();
+        return usuarios; 
     }
 }

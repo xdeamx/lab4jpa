@@ -12,3 +12,7 @@
 hs_err_pid*
 /Lab3-MueblesDeLosAlpes/Lab3-MueblesDeLosAlpes-ejb/build/
 /Lab3-MueblesDeLosAlpes/Lab3-MueblesDeLosAlpes-ejb/dist/
+/Lab3-MueblesDeLosAlpes/Lab3-MueblesDeLosAlpes-war/build/
+/Lab3-MueblesDeLosAlpes/build/
+/Lab3-MueblesDeLosAlpes/dist/
+/Lab3-MueblesDeLosAlpes/Lab3-MueblesDeLosAlpes-war/dist/

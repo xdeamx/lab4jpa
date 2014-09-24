@@ -82,6 +82,10 @@
             <from-outcome>login</from-outcome>
             <to-view-id>/index.jsf</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-action>verHistorialCliente</from-action>
+            <to-view-id>/HistorialUsuarioView.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
@@ -91,5 +95,12 @@
             <to-view-id>/index.jsf</to-view-id>
         </navigation-case>
     </navigation-rule>
-
+    <navigation-rule>
+        <description>Maneja la navegación del reporte del historial del cliente</description>
+        <from-view-id>/HistorialUsuarioView.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>listadoCliente</from-action>
+            <to-view-id>/catalogoCliente.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
