@@ -14,6 +14,8 @@
 package com.losalpes.servicios;
 
 import com.losalpes.entities.Ciudad;
+import com.losalpes.entities.Mueble;
+import com.losalpes.entities.RegistroVenta;
 import com.losalpes.entities.Usuario;
 import com.losalpes.excepciones.OperacionInvalidaException;
 import java.io.Serializable;
@@ -163,5 +165,16 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
             
         usuarios = query.getResultList();
         return usuarios; 
+    }
+    
+    /**
+     * 
+     * @param ventas
+     * @return 
+     */
+    @Override
+    public List<Mueble> findTopfurniture(List<RegistroVenta> ventas) {
+        List<Mueble> muebles = null;
+        return muebles;
     }
 }

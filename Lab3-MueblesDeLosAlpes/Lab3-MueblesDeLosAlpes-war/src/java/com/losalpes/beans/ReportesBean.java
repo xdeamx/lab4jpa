@@ -76,13 +76,8 @@ public class ReportesBean {
       */
      public List<Mueble> getMueblesMasVendidos()
     {
-       /*List<RegistroVenta> registrosVentas = persistenciaService.findAll(RegistroVenta.class);
-        for (RegistroVenta registro : registrosVentas) {
-            System.out.println(registro.getCantidad());
-        }*/
-
-        //List<Mueble> muebles = persistenciaService.findTopMuebles(Mueble.class);
-       List<Mueble> muebles = persistenciaService.findAll(Mueble.class);
+       List<RegistroVenta> ventas = persistenciaService.findAll(RegistroVenta.class);
+       List<Mueble> muebles = persistenciaService.findTopfurniture(ventas);
         return muebles;
     }
 }
