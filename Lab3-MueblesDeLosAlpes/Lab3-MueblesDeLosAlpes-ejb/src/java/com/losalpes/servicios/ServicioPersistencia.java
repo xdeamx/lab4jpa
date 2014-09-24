@@ -13,8 +13,6 @@
 
 package com.losalpes.servicios;
 
-
-
 import com.losalpes.entities.Ciudad;
 import com.losalpes.entities.Mueble;
 import com.losalpes.entities.RegistroVenta;
@@ -157,6 +155,12 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
         }
     }
 
+    /**
+     * Obtiene la lista de usuarios que se encuentran en el listado de ciudades recibidas
+     * @param ciudades Listado de ciudades a consultar
+     * @param max Limite de resultados
+     * @return 
+     */    
     @Override
     public List<Usuario> findUsersByCities(List<Ciudad> ciudades, int max) {
         //List<String> names= new ArrayList<String>();
@@ -184,13 +188,29 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     }
     
     /**
-     * 
-     * @param ventas
+     * Obtiene la lista de muebles mas vendidos
+     * @param ventas listado de las ventas realizadas
+     * @param max Limite de resultados
      * @return 
      */
     @Override
-    public List<Mueble> findTopfurniture(List<RegistroVenta> ventas) {
-        List<Mueble> muebles = null;
+    public List<Mueble> findTopfurniture(List<RegistroVenta> ventas,int max) {
+        List<Mueble> muebles = null;  
+        String sql = "select mueble from registroventa.mueble mueble item group by mueble.nombre order by sum(registroventa.mueble.cantidad) DESC";
+        Query query = em.createQuery(sql, RegistroVenta.class);
+        //query.setParameter("names", names);
+        if(max > 0)
+            query.setMaxResults(max);
+            
+        muebles = query.getResultList(); 
         return muebles;
     }
+    
+    /*
+            SELECT mueble.nombre, SUM(registroventa.cantidad) AS numeroventas FROM registroventa
+    LEFT JOIN mueble
+    ON registroventa.producto_id=mueble.id
+    GROUP BY mueble.nombre
+    ORDER BY  SUM(registroventa.cantidad) DESC;
+     */
 }
