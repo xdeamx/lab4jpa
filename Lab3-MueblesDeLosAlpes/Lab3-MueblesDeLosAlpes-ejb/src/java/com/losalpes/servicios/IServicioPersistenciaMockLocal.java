@@ -12,7 +12,9 @@
 
 package com.losalpes.servicios;
 
+import com.losalpes.entities.Mueble;
 import com.losalpes.excepciones.OperacionInvalidaException;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -22,6 +24,7 @@ import javax.ejb.Local;
 @Local
 public interface IServicioPersistenciaMockLocal
 {
+  
 
     /**
      * Crea un objeto dentro de la persistencia del sistema.
