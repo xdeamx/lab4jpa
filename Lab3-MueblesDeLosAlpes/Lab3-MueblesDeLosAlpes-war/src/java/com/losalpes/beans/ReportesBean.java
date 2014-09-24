@@ -81,8 +81,8 @@ public class ReportesBean {
             System.out.println(registro.getCantidad());
         }*/
 
-        List<Mueble> muebles = persistenciaService.findTopMuebles(Mueble.class);
-       
+        //List<Mueble> muebles = persistenciaService.findTopMuebles(Mueble.class);
+       List<Mueble> muebles = persistenciaService.findAll(Mueble.class);
         return muebles;
     }
 }
