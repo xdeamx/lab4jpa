@@ -17,6 +17,7 @@ import com.losalpes.entities.RegistroVenta;
 import com.losalpes.entities.Usuario;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
@@ -40,7 +41,7 @@ public class ServicioCarritoMock implements IServicioCarritoMockRemote, IServici
     /**
      * Lista con los muebles del carrito
      */
-    private ArrayList<Mueble> inventario;
+    private List<Mueble> inventario;
 
     /**
      * Precio total de todo el inventario
@@ -73,7 +74,7 @@ public class ServicioCarritoMock implements IServicioCarritoMockRemote, IServici
      * @return inventario Lista con los muebles que se encuentran en el carrito
      */
     @Override
-    public ArrayList<Mueble> getInventario()
+    public List<Mueble> getInventario()
     {
         return inventario;
     }
@@ -83,7 +84,7 @@ public class ServicioCarritoMock implements IServicioCarritoMockRemote, IServici
      * @param inventario Nueva lista de muebles
      */
     @Override
-    public void setInventario(ArrayList<Mueble> inventario)
+    public void setInventario(List<Mueble> inventario)
     {
         this.inventario = inventario;
     }

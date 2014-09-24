@@ -11,8 +11,11 @@
  */
 
 package com.losalpes.servicios;
-
+///////
 import com.losalpes.entities.Mueble;
+import com.losalpes.entities.Ciudad;
+import com.losalpes.entities.Usuario;
+//////
 import com.losalpes.excepciones.OperacionInvalidaException;
 import java.util.List;
 import javax.ejb.Local;
@@ -58,5 +61,12 @@ public interface IServicioPersistenciaMockLocal
      * @return obj Resultado de la consulta.
      */
     public java.lang.Object findById(java.lang.Class c, java.lang.Object id);
-    
+
+    /**
+     * Obtiene los clientes que pertenecen al listado de ciudades
+     * @param ciudades 
+     * @param  max cantidad maxima de registros a obtener
+     */
+    public List<Usuario> findUsersByCities(List<Ciudad> ciudades,int max);
+
 }

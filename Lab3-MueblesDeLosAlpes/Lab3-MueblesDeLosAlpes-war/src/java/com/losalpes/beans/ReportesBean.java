@@ -1,95 +1,76 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * $Id$ ReporteBean.java
- * Universidad de los Andes (Bogotá - Colombia)
- * Departamento de Ingeniería de Sistemas y Computación
- * Licenciado bajo el esquema Academic Free License version 3.0
- *
- * Ejercicio: Muebles de los Alpes
- * Autor: Gabriel Martinez Rojas
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package com.losalpes.beans;
 
+import com.losalpes.entities.Ciudad;
 import com.losalpes.entities.Mueble;
+import com.losalpes.entities.Pais;
 import com.losalpes.entities.RegistroVenta;
+import com.losalpes.entities.Usuario;
 import com.losalpes.servicios.IServicioPersistenciaMockLocal;
-import com.losalpes.servicios.IServicioVendedoresMockLocal;
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  * Managed Bean encargado de la administración de reportes en el sistema
- * @author 
+ * @author paulacastellanos
  */
-public class ReportesBean implements Serializable
-{
+@ManagedBean(name = "reportesBean")
+@SessionScoped
+public class ReportesBean {
 
-    //-----------------------------------------------------------
-    // Atributos
-    //-----------------------------------------------------------
-
-    /**
-     * Relación con la interfaz que provee los servicios necesarios de persistencia para los reportes
-     */    
     @EJB
-    private IServicioPersistenciaMockLocal persistenciaService;    
+    private IServicioPersistenciaMockLocal persistenciaService;
     
+    private int idCliente;
+    private Pais pais=null;
     /**
-     * Relación con la interfaz que provee los servicios necesarios del vendedor
+     * Creates a new instance of ReportesBean
      */
-    @EJB
-    private IServicioVendedoresMockLocal vendedor;  
-
-    /**
-     * Representa un nuevo registro de venta a ingresar
-     */
-    private RegistroVenta registroVenta;
-
-
-
-    //-----------------------------------------------------------
-    // Constructor
-    //-----------------------------------------------------------
-
-    /**
-     * Constructor sin argumentos de la clase
-     */
-    public ReportesBean()
-    {
-        registroVenta=new RegistroVenta();
+    public ReportesBean() {
+    }
+    
+    public List<RegistroVenta> getReportesComprasCliente(){
+        Usuario usuario = (Usuario)persistenciaService.findById(Usuario.class, idCliente);
+        return usuario.getCompras();
+    }
+    
+    public String verHistial(int idCliente){
+        this.idCliente = idCliente;
+        return "verHistorialCliente";
+    }
+    
+    public void setPais(Pais pais){
+        this.pais = pais;
+    }
+    public Pais getPais(){
+        return pais;
+    }
+    
+    public List<Usuario> getTop5Usuarios(){
+        List<Usuario> usuarios= new LinkedList<Usuario>();
+        List<Ciudad> ciudades;
+        if(this.pais !=null){
+            ciudades = this.pais.getCiudades();
+            usuarios = persistenciaService.findUsersByCities(ciudades,5);
+        }
+        return usuarios;
+    }
+    
+    public int calcularTotalCompras(Usuario usuario){
+        int total = 0;
+        for(RegistroVenta compra : usuario.getCompras()){
+            total += compra.getCantidad() * compra.getProducto().getPrecio();
+        }
+        return total;
+    }
+    
+    public List<Pais> getPaises(){
+        return persistenciaService.findAll(Pais.class);
     }
 
-    //-----------------------------------------------------------
-    // Getters y setters
-    //-----------------------------------------------------------
-
     /**
-     * Retorna un registro de ventas
-     * @return 
-     */    
-    public RegistroVenta getRegistroVenta() {
-        return registroVenta;
-    }
-
-    /**
-     * Establece el registro de ventas
-     * @param registroVenta 
-     */
-    public void setRegistroVenta(RegistroVenta registroVenta) {
-        this.registroVenta = registroVenta;
-    }
- 
-
-    //-----------------------------------------------------------
-    // Métodos
-    //-----------------------------------------------------------
-
-     /**
       * Retorna el listado de muebles más vendidos
       * @return Lista con todos los muebles mas vendidos
       */
@@ -103,13 +84,5 @@ public class ReportesBean implements Serializable
         List<Mueble> muebles = persistenciaService.findTopMuebles(Mueble.class);
        
         return muebles;
-
-
-
-
     }
-   
-     
-     
-     
 }

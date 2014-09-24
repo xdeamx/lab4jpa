@@ -14,6 +14,8 @@ package com.losalpes.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -85,7 +87,7 @@ public class Usuario implements Serializable
     /**
      * Ciudad de residencia del usuario
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Ciudad ciudad;
 
     /**
@@ -114,8 +116,8 @@ public class Usuario implements Serializable
      */
     
     
-    @OneToMany(mappedBy = "comprador", fetch = FetchType.LAZY)
-    private ArrayList<RegistroVenta>compras;
+    //@OneToMany(mappedBy = "comprador", fetch = FetchType.LAZY)
+    private List<RegistroVenta>compras;
 
     //-----------------------------------------------------------
     // Constructores
@@ -367,7 +369,7 @@ public class Usuario implements Serializable
      * Devuelve las compras realizadas por un cliente
      * @return compras Lista con las compras realizadas por el cliente
      */
-    public ArrayList<RegistroVenta> getCompras()
+    public List<RegistroVenta> getCompras()
     {
         return compras;
     }
@@ -376,7 +378,7 @@ public class Usuario implements Serializable
      * Modifica las compras realizadas por un cliente
      * @param compras Nueva lista de compras
      */
-    public void setCompras(ArrayList<RegistroVenta> compras)
+    public void setCompras(List<RegistroVenta> compras)
     {
         this.compras = compras;
     }
@@ -406,5 +408,15 @@ public class Usuario implements Serializable
     {
         this.seleccion = seleccion;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    
 
 }

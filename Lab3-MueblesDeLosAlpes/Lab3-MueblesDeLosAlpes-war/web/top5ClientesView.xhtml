@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/main-template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:param name="titulo" value="Top 5 de clientes por país" />
+    <ui:define name="body">
+        <h:form>
+            <ice:selectOneMenu value="#{reportesBean.pais}" >
+                <f:selectItems value="#{reportesBean.paises}" />
+            </ice:selectOneMenu>
+            <ice:commandButton value="Buscar" action="top5ClientesView"></ice:commandButton>
+                              
+        </h:form>
+        
+        <h:form>
+            <ice:panelGroup>
+                <!-- Se crea una tabla donde se presentan los muebles del sistema -->
+                <ice:dataTable
+                    id="data"
+                    value="#{reportesBean.top5Usuarios}"
+                    var="usuario"
+                    columnWidths="100px,50px,230px,60px"
+                    scrollable="false"
+                    scrollHeight="100px"
+                    cellpadding="0"
+                    resizable="true"
+                    rows="5">
+                    <ice:column>
+                        <f:facet name="header">
+                            Nombre
+                        </f:facet>
+                        <ice:outputText value="#{usuario.nombreCompleto}"/>
+                    </ice:column>
+                    <ice:column>
+                        <f:facet name="header">
+                            Login
+                        </f:facet>
+                        <ice:outputText value="#{usuario.login}"/>
+                    </ice:column>
+                    
+                    <ice:column>
+                        <f:facet name="header">
+                            Numero de compras 
+                        </f:facet>
+                        <ice:outputText value="#{ usuario.compras!= null? usuario.compras.size():0}"/>
+                    </ice:column>
+                    
+                    <ice:column>
+                        <f:facet name="header">
+                            Total de compras 
+                        </f:facet>
+                        <ice:outputText value="#{reportesBean.calcularTotalCompras(usuario) }"/>
+                    </ice:column>
+                    
+                </ice:dataTable>
+
+                
+            </ice:panelGroup>
+        </h:form>
+    </ui:define>
+</ui:composition>
