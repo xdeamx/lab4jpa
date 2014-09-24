@@ -17,7 +17,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
+import javax.persistence.GeneratedValue; 
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -46,7 +46,7 @@ public class RegistroVenta implements Serializable
     /**
      * Producto vendido
      */
-    @OneToOne( fetch = FetchType.LAZY)
+    @OneToOne( fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Mueble producto;
 
     /**

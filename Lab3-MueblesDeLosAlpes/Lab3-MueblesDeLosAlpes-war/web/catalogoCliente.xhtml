@@ -44,7 +44,6 @@
                                  style="padding: 10px"
                                  summary="Se realiza el registro de un nuevo usuario en el sistema">
 
-
                     <!-- Panel Tab 1 defined with some basic content -->
                     <ice:panelTab rendered="true"
                                   label="Catálogo de productos"
@@ -341,21 +340,21 @@
                     <ice:panelTab rendered="true"
                                   label="Productos adquiridos"
                                   title="Productos adquiridos">
-                        <h:form>
+                        
                             <ice:panelGroup style="background-color: white;padding-left: 150px">
                                 <ice:panelGroup style="background-color: white">
 
 
                                     <!-- Se crea una tabla donde se presentan los muebles del sistema -->
                                     <ice:dataTable
-                                        id="data"
+                                        id="datacompras"
                                         value="#{loginBean.sesion.compras}"
                                         var="file"
                                         scrollable="false"
                                         scrollHeight="100px"
                                         cellpadding="0"
                                         resizable="true"
-                                        rows="8">
+                                        rows="4">
 
                                         <ice:column>
 
@@ -391,52 +390,56 @@
                                 <ice:panelGroup style="background-color: white;padding-left: 100px">
 
                                     <!-- Se crea y establecen propiedades del paginador -->
-                                    <ice:dataPaginator id="dataScroll_1"
+                                    <ice:dataPaginator id="dataScroll_2"
 
-                                                       for="data"
+                                                       for="datacompras"
                                                        vertical="false"
                                                        fastStep="3"
                                                        paginator="true"
                                                        paginatorMaxPages="4">
                                         <f:facet name="first">
-                                            <ice:graphicImage id="firstpage_1"
+                                            <ice:graphicImage id="firstpage_2"
                                                               url="./resources/img/graphics/arrow-first.gif"
                                                               style="border:none;"
                                                               title="Ir a la primera página"/>
                                         </f:facet>
                                         <f:facet name="last">
-                                            <ice:graphicImage id="lastpage_1"
+                                            <ice:graphicImage id="lastpage_2"
                                                               url="./resources/img/graphics/arrow-last.gif"
                                                               style="border:none;"
                                                               title="Ir a la última página"/>
                                         </f:facet>
                                         <f:facet name="previous">
-                                            <ice:graphicImage id="previouspage_1"
+                                            <ice:graphicImage id="previouspage_2"
                                                               url="./resources/img/graphics/arrow-previous.gif"
                                                               style="border:none;"
                                                               title="Atrás"/>
                                         </f:facet>
                                         <f:facet name="next">
-                                            <ice:graphicImage id="nextpage_1"
+                                            <ice:graphicImage id="nextpage_2"
                                                               url="./resources/img/graphics/arrow-next.gif"
                                                               style="border:none;"
                                                               title="Siguiente"/>
                                         </f:facet>
                                         <f:facet name="fastforward">
-                                            <ice:graphicImage id="fastforward_1"
+                                            <ice:graphicImage id="fastforward_2"
                                                               url="./resources/img/graphics/arrow-ff.gif"
                                                               style="border:none;"/>
                                         </f:facet>
                                         <f:facet name="fastrewind">
-                                            <ice:graphicImage id="fastrewind_1"
+                                            <ice:graphicImage id="fastrewind_2"
                                                               url="./resources/img/graphics/arrow-fr.gif"
                                                               style="border:none;"/>
                                         </f:facet>
                                     </ice:dataPaginator>
                                 </ice:panelGroup>
                             </ice:panelGroup>
-                        </h:form>
+                        
                     </ice:panelTab>
+                    
+                    
+
+                    
                 </ice:panelTabSet>
             </h:form>
         </ice:panelGroup>

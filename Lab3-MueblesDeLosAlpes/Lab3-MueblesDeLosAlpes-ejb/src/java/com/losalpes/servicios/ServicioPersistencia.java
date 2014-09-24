@@ -13,6 +13,7 @@
 
 package com.losalpes.servicios;
 
+import com.losalpes.entities.Mueble;
 import com.losalpes.entities.Usuario;
 import com.losalpes.excepciones.OperacionInvalidaException;
 import java.io.Serializable;
@@ -126,14 +127,24 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
             String queryString = "SELECT c FROM "+c.getSimpleName()+" c  Where c.login ='"+String.valueOf(id)+"'";
             Query query = em.createQuery(queryString);
             List tmp=query.getResultList();
-            System.out.println(queryString);
-            System.out.println(tmp.size());
             if(tmp!=null){
              if(tmp.size()>0){
               return tmp.get(0);
              }
             }
             return null;
+        }
+        if(c.equals(Mueble.class)){
+            String queryString = "SELECT m FROM "+c.getSimpleName()+" m  Where m.referencia="+String.valueOf(id)+"";
+            Query query = em.createQuery(queryString);
+            List tmp=query.getResultList();
+            if(tmp!=null){
+             if(tmp.size()>0){
+              return tmp.get(0);
+             }
+            }
+            return null;
+            
         }else{
             return em.find(c, id);
         }

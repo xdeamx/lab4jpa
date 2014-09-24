@@ -126,7 +126,8 @@ public class ServicioCarritoMock implements IServicioCarritoMockRemote, IServici
             mueble = inventario.get(i);
             Mueble editar=(Mueble) persistencia.findById(Mueble.class, mueble.getReferencia());
             editar.setCantidad(editar.getCantidad()-mueble.getCantidad());
-            RegistroVenta compra=new RegistroVenta(new Date(System.currentTimeMillis()), mueble, mueble.getCantidad(), null, usuario);
+            mueble.setId(editar.getId());
+            RegistroVenta compra=new RegistroVenta(new Date(System.currentTimeMillis()), mueble, mueble.getCantidad(), usuario.getCiudad().getNombre(), usuario);
             usuario.agregarRegistro(compra);
 
             persistencia.update(usuario);
