@@ -16,3 +16,5 @@ hs_err_pid*
 /Lab3-MueblesDeLosAlpes/build/
 /Lab3-MueblesDeLosAlpes/Lab3-MueblesDeLosAlpes-war/dist/
 /Lab3-MueblesDeLosAlpes/dist/
+Lab3-MueblesDeLosAlpes/Lab3-MueblesDeLosAlpes-ejb/nbproject/private/private.xml
+Lab3-MueblesDeLosAlpes/Lab3-MueblesDeLosAlpes-war/nbproject/private/private.xml
