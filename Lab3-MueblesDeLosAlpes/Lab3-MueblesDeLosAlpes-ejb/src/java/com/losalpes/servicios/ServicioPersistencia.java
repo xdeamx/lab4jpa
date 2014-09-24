@@ -13,13 +13,20 @@
 
 package com.losalpes.servicios;
 
+
 import com.losalpes.entities.Mueble;
+import com.losalpes.entities.Ciudad;
+import com.losalpes.entities.Mueble;
+import com.losalpes.entities.RegistroVenta;
 import com.losalpes.entities.Usuario;
 import com.losalpes.excepciones.OperacionInvalidaException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -44,6 +51,10 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     EntityManager em;
     EntityTransaction et;
     
+    @PersistenceUnit
+    private EntityManagerFactory entityManagerFactory; 
+    EntityManager entityManager = entityManagerFactory.createEntityManager(); 
+
     //TODO
 
     //-----------------------------------------------------------
@@ -148,5 +159,34 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
         }else{
             return em.find(c, id);
         }
+    }
+
+    @Override
+    public List<Usuario> findUsersByCities(List<Ciudad> ciudades, int max) {
+        ArrayList<String> names= new ArrayList<String>();
+        List<Usuario> usuarios;
+        for(Ciudad ciudad : ciudades){
+            names.add(ciudad.getNombre());
+        }
+        String sql = "select usuario from Usuario usuario item where usuario.ciudad.nombre IN (:names)";
+       
+        Query query = entityManager.createQuery(sql, Usuario.class);
+        query.setParameter("names", names);
+        if(max > 0)
+            query.setMaxResults(max);
+            
+        usuarios = query.getResultList();
+        return usuarios; 
+    }
+    
+    /**
+     * 
+     * @param ventas
+     * @return 
+     */
+    @Override
+    public List<Mueble> findTopfurniture(List<RegistroVenta> ventas) {
+        List<Mueble> muebles = null;
+        return muebles;
     }
 }

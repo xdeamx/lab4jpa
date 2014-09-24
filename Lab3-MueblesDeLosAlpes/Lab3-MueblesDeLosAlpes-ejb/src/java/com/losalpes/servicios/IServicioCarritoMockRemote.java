@@ -14,7 +14,6 @@ package com.losalpes.servicios;
 
 import com.losalpes.entities.Mueble;
 import com.losalpes.entities.Usuario;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Remote;
 

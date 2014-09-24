@@ -12,7 +12,13 @@
 
 package com.losalpes.servicios;
 
+import com.losalpes.entities.Mueble;
+import com.losalpes.entities.Ciudad;
+import com.losalpes.entities.RegistroVenta;
+import com.losalpes.entities.Usuario;
+
 import com.losalpes.excepciones.OperacionInvalidaException;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -22,6 +28,7 @@ import javax.ejb.Local;
 @Local
 public interface IServicioPersistenciaMockLocal
 {
+  
 
     /**
      * Crea un objeto dentro de la persistencia del sistema.
@@ -55,5 +62,18 @@ public interface IServicioPersistenciaMockLocal
      * @return obj Resultado de la consulta.
      */
     public java.lang.Object findById(java.lang.Class c, java.lang.Object id);
+
+    /**
+     * Obtiene los clientes que pertenecen al listado de ciudades
+     * @param ciudades 
+     * @param  max cantidad maxima de registros a obtener
+     */
+    public List<Usuario> findUsersByCities(List<Ciudad> ciudades,int max);
     
+     /**
+     * Obtiene los muebles mas vendidos
+     * @param ventas Registro de ventas
+     */
+    public List<Mueble> findTopfurniture(List<RegistroVenta> ventas);
+
 }
