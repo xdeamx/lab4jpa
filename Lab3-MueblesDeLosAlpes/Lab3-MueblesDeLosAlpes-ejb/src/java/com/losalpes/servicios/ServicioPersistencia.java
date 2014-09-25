@@ -15,10 +15,13 @@ package com.losalpes.servicios;
 
 import com.losalpes.entities.Ciudad;
 import com.losalpes.entities.Mueble;
+import com.losalpes.entities.MuebleReporte;
 import com.losalpes.entities.RegistroVenta;
 import com.losalpes.entities.Usuario;
 import com.losalpes.excepciones.OperacionInvalidaException;
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -193,23 +196,22 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
      * @return 
      */
     @Override
-    public List<Mueble> findTopfurniture(int max) {
-        List<Mueble> muebles = null;  
-        //String sql = "select registroVenta.producto from registroventa.producto group by registroventa.producto.nombre order by sum(registroventa.producto.cantidad) DESC";
-        //String sql = "select mueble from registroventa.producto mueble";
-        String sql = "SELECT m FROM RegistroVenta.producto m WHERE m.nombre LIKE :nombre";
+    public List<MuebleReporte> findTopfurniture(int max) {
 
-        //String sql = "SELECT rv.producto FROM RegistroVenta rv GROUP BY rv.producto.nombre ORDER BY sum(rv.cantidad) DESC";
-        //String sql = "SELECT registroVenta.producto FROM RegistroVenta registroVenta GROUP BY registroVenta.producto.nombre ORDER BY registroVenta.cantidad DESC"; 
-        Query query = em.createQuery(sql, RegistroVenta.class);
-                      query.setParameter("nombre", "silla");
-        
-        //query.setParameter("names", names);
-        if(max > 0)
-            query.setMaxResults(max);
-            
-        muebles = query.getResultList(); 
-        return muebles;
+        List<MuebleReporte> listadoReporte = new ArrayList<MuebleReporte>();
+        Query query = em.createNativeQuery("select distinct(m.id),m.nombre, sum(r.CANTIDAD) from registroventa r, mueble m where m.id=r.producto_id group by m.id,m.nombre,(m.id) order by sum(r.CANTIDAD) desc");
+
+        List<Object[]> result = (List<Object[]>) query.getResultList();
+
+        for(int i=0; i<result.size();i++){
+          Object[] rtmp = result.get(i);
+          MuebleReporte m = new MuebleReporte();
+          m.setId(((BigDecimal)rtmp[0]).longValue());
+          m.setNombre((String)rtmp[1]);
+          m.setTotal(((BigDecimal) rtmp[2]).intValue());
+          listadoReporte.add(m);
+        }
+        return  listadoReporte;
     }
     
     /*

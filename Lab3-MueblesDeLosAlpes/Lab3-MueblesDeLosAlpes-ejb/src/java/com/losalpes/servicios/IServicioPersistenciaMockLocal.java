@@ -14,6 +14,7 @@ package com.losalpes.servicios;
 
 import com.losalpes.entities.Mueble;
 import com.losalpes.entities.Ciudad;
+import com.losalpes.entities.MuebleReporte;
 import com.losalpes.entities.RegistroVenta;
 import com.losalpes.entities.Usuario;
 
@@ -74,6 +75,6 @@ public interface IServicioPersistenciaMockLocal
      * Obtiene los muebles mas vendidos
      * @param  max cantidad maxima de registros a obtener
      */
-    public List<Mueble> findTopfurniture(int max);
+    public List<MuebleReporte> findTopfurniture(int max);
 
 }

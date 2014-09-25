@@ -2,6 +2,7 @@ package com.losalpes.beans;
 
 import com.losalpes.entities.Ciudad;
 import com.losalpes.entities.Mueble;
+import com.losalpes.entities.MuebleReporte;
 import com.losalpes.entities.Pais;
 import com.losalpes.entities.RegistroVenta;
 import com.losalpes.entities.Usuario;
@@ -77,10 +78,10 @@ public class ReportesBean {
       * Retorna el listado de muebles más vendidos
       * @return Lista con todos los muebles mas vendidos
       */
-     public List<Mueble> getMueblesMasVendidos()
+     public List<MuebleReporte> getMueblesMasVendidos()
     {
        //List<RegistroVenta> ventas = persistenciaService.findAll(RegistroVenta.class);
-       List<Mueble> muebles = persistenciaService.findTopfurniture(3);
+       List<MuebleReporte> muebles = persistenciaService.findTopfurniture(3);
        return muebles;
     }
      

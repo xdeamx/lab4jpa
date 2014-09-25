@@ -11,11 +11,12 @@
     <ui:define name="body">
         <h:form>
                 <div align="right" style="padding-right: 10px">
-                    <ice:commandButton style="background: transparent" image="./resources/img/pag/atras.png" action="clientes.jsf"/>
+                    <ice:commandButton style="background: transparent" image="./resources/img/pag/atras.png" action="catalogo.jsf"/>
                 </div>
         </h:form>
         
         <h:form>
+            <h2>Top 3 de Muebles más vendidos</h2>
             <ice:panelGroup>
                 <!-- Se crea una tabla donde se presentan los muebles del sistema -->
                 <ice:dataTable
@@ -33,30 +34,12 @@
                             Nombre
                         </f:facet>
                         <ice:outputText value="#{mueble.nombre}"/>
-                    </ice:column>
+                    </ice:column>  
                     <ice:column>
                         <f:facet name="header">
-                            Descripcion
+                            Total Vendidos
                         </f:facet>
-                        <ice:outputText value="#{mueble.descripcion}"/>
-                    </ice:column>
-                    <ice:column>
-                        <f:facet name="header">
-                            Referencia
-                        </f:facet>
-                        <ice:outputText value="#{mueble.referencia}"/>
-                    </ice:column>
-                    <ice:column>
-                        <f:facet name="header">
-                            Tipo
-                        </f:facet>
-                        <ice:outputText value="#{mueble.tipo}"/>
-                    </ice:column>    
-                    <ice:column>
-                        <f:facet name="header">
-                            Precio
-                        </f:facet>
-                        <ice:outputText value="#{mueble.precio}"/>
+                        <ice:outputText value="#{mueble.total}"/>
                     </ice:column>                      
                 </ice:dataTable>
             </ice:panelGroup>
