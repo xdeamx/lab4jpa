@@ -15,12 +15,12 @@ package com.losalpes.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue; 
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -40,12 +40,14 @@ public class RegistroVenta implements Serializable
     /**
      * Fecha en la que se vendió el producto
      */
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaVenta;
+    //@Temporal(javax.persistence.TemporalType.DATE)
+    //private Date fechaVenta;
 
     /**
      * Producto vendido
      */
+    @MapsId("muebleId") //references EmbeddedId's property
+    @JoinColumn(name = "producto_id", referencedColumnName = "id")
     @OneToOne( fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Mueble producto;
 
@@ -62,13 +64,16 @@ public class RegistroVenta implements Serializable
     /**
      * Usuario que compró el producto
      */
-    
+    @MapsId("usuarioId") //references EmbeddedId's property
+    @JoinColumn(name = "comprador_id", referencedColumnName = "id")
     @ManyToOne (fetch = FetchType.LAZY)
     private Usuario comprador;
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    //private Long id;
+    
+    @EmbeddedId RegistroVentaPk id;
 
     //-----------------------------------------------------------
     // Constructor
@@ -89,10 +94,10 @@ public class RegistroVenta implements Serializable
      * @param ciudad Ciudad en la que se vendió el producto
      * @param comprador Usuario que compro el mueble
      */
-    public RegistroVenta(Date fechaVenta, Mueble producto, int cantidad,
+    public RegistroVenta(Mueble producto, int cantidad,
             String ciudad, Usuario comprador)
     {
-        this.fechaVenta = fechaVenta;
+        //this.fechaVenta = fechaVenta;
         this.producto = producto;
         this.cantidad = cantidad;
         this.ciudad = ciudad;
@@ -125,19 +130,19 @@ public class RegistroVenta implements Serializable
      * Devuelve la fecha en que se vendió el mueble
      * @return fechaVenta Fecha de venta del mueble
      */
-    public Date getFechaVenta()
+    /*public Date getFechaVenta()
     {
         return fechaVenta;
-    }
+    }*/
 
     /**
      * Modifica la fecha en que se vendió el mueble
      * @param fechaVenta Nueva fecha de venta
      */
-    public void setFechaVenta(Date fechaVenta)
+    /*public void setFechaVenta(Date fechaVenta)
     {
         this.fechaVenta = fechaVenta;
-    }
+    }*/
 
     /**
      * Devuelve el mueble adquirido
@@ -193,12 +198,20 @@ public class RegistroVenta implements Serializable
         this.comprador = comprador;
     }
 
-    public Long getId() {
+    /*public Long getId() {
+    return id;
+    }
+    public void setId(Long id) {
+    this.id = id;
+    }*/
+    public RegistroVentaPk getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(RegistroVentaPk id) {
         this.id = id;
     }
+    
+    
 
 }

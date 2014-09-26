@@ -14,6 +14,7 @@ package com.losalpes.servicios;
  
 import com.losalpes.entities.Mueble;
 import com.losalpes.entities.RegistroVenta;
+import com.losalpes.entities.RegistroVentaPk;
 import com.losalpes.entities.Usuario;
 import java.util.ArrayList;
 import java.util.Date;
@@ -127,7 +128,12 @@ public class ServicioCarritoMock implements IServicioCarritoMockRemote, IServici
             Mueble editar=(Mueble) persistencia.findById(Mueble.class, mueble.getReferencia());
             editar.setCantidad(editar.getCantidad()-mueble.getCantidad());
             mueble.setId(editar.getId());
-            RegistroVenta compra=new RegistroVenta(new Date(System.currentTimeMillis()), mueble, mueble.getCantidad(), usuario.getCiudad().getNombre(), usuario); 
+            RegistroVenta compra=new RegistroVenta(mueble, mueble.getCantidad(), usuario.getCiudad().getNombre(), usuario); 
+            RegistroVentaPk rVentaPk = new RegistroVentaPk();
+            rVentaPk.setUsuarioId(usuario.getId());
+            rVentaPk.setMuebleId(editar.getId());
+            rVentaPk.setFecha(new Date(System.currentTimeMillis()));
+            compra.setId(rVentaPk);
             usuario.agregarRegistro(compra);
 
             persistencia.update(usuario);
